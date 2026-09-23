@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>«Мы в деле» — Бухгалтерия без нафталина</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            400: '#a78bfa',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            900: '#4c1d95',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-blob {
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(168, 85, 247, 0.15) 50%, rgba(236, 72, 153, 0.05) 100%);
+        }
+        .neon-card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased selection:bg-brand-500 selection:text-white relative overflow-x-hidden">
+
+    <!-- Фоновые мягкие градиенты в стиле логотипа -->
+    <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-purple-600/15 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-1/4 left-1/3 w-[500px] h-[500px] bg-pink-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <!-- Шапка -->
+    <header class="bg-slate-900/80 backdrop-blur-md border-b border-slate-800 sticky top-0 z-40 shadow-lg">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <!-- Логотип-адаптация из картинки пользователя -->
+                <div class="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-500 via-indigo-500 to-purple-600 p-0.5 shadow-lg shadow-purple-500/20 flex items-center justify-center">
+                    <div class="w-full h-full bg-slate-900 rounded-[14px] flex items-center justify-center overflow-hidden">
+                        <img src="https://i.yapx.ru/eNYkV.png" alt="Мы в деле" class="w-10 h-10 object-contain">
+                    </div>
+                </div>
+                <div>
+                    <span class="text-xl font-extrabold tracking-tight text-white flex items-center gap-2">
+                        «Мы в деле» <span class="text-xs px-2 py-0.5 rounded-full bg-yellow-400/20 text-yellow-300 font-semibold border border-yellow-400/30">без нафталина</span>
+                    </span>
+                    <p class="text-xs text-slate-400 font-medium">Бухгалтерия с человеческим лицом и без скуки</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="text-right hidden sm:block">
+                    <p class="text-xs text-slate-400">Ваш тариф за месяц:</p>
+                    <p id="top-total" class="text-lg font-bold text-yellow-400">0 ₽</p>
+                </div>
+                <a href="#calculator" class="bg-gradient-to-r from-cyan-500 to-brand-600 hover:from-cyan-400 hover:to-brand-500 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition shadow-lg shadow-brand-500/30 flex items-center gap-2">
+                    Собрать тариф ⚡
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Главный экран -->
+    <section class="max-w-6xl mx-auto px-4 py-16 text-center relative z-10">
+        <div class="inline-block bg-purple-950/80 text-purple-300 border border-purple-500/30 font-semibold px-4 py-1.5 rounded-full text-xs sm:text-sm mb-6 uppercase tracking-wider shadow-inner">
+            ✨ Бухгалтерия, от которой не хочется плакать
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight mb-6 leading-tight">
+            Считаем налоги, бережем нервы, <br class="hidden sm:inline">разговариваем на человеческом языке
+        </h1>
+        <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed">
+            Забудь про дебеты, кредиты и налоговые ребусы. У нас нет скучных бухгалтеров с нафталином в шкафу — только драйв, порядок и спокойный сон для твоего бизнеса.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto text-left">
+            <div class="neon-card p-6 rounded-2xl shadow-xl hover:border-purple-500/50 transition">
+                <div class="text-3xl mb-3">🛡️</div>
+                <h3 class="font-bold text-white mb-1">Никаких штрафов</h3>
+                <p class="text-sm text-slate-400">Следим за сроками строже, чем за любимым сериалом. Ошибемся — ответим своей репутацией и кошельком.</p>
+            </div>
+            <div class="neon-card p-6 rounded-2xl shadow-xl hover:border-purple-500/50 transition">
+                <div class="text-3xl mb-3">💬</div>
+                <h3 class="font-bold text-white mb-1">Без птичьего языка</h3>
+                <p class="text-sm text-slate-400">Объясняем сложные законы простыми словами в удобном мессенджере. Без заумных терминов.</p>
+            </div>
+            <div class="neon-card p-6 rounded-2xl shadow-xl hover:border-purple-500/50 transition">
+                <div class="text-3xl mb-3">🧩</div>
+                <h3 class="font-bold text-white mb-1">Гибкий конструктор</h3>
+                <p class="text-sm text-slate-400">Платишь ровно за то, что реально нужно твоему бизнесу. Никаких навязанных пакетов и скрытых счетов.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Основной калькулятор -->
+    <main id="calculator" class="max-w-6xl mx-auto px-4 pb-20 scroll-mt-20 relative z-10">
+        <div class="bg-slate-900/90 rounded-3xl border border-slate-800 shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 backdrop-blur-xl">
+            
+            <!-- Левая колонка: Настройки тарифа (8 колонок) -->
+            <div class="lg:col-span-8 p-6 sm:p-10 space-y-10">
+                
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-2">Конструктор твоего идеального тарифа</h2>
+                    <p class="text-sm text-slate-400">Отметь параметры своего бизнеса, и калькулятор моментально соберет честную стоимость.</p>
+                </div>
+
+                <!-- Блок 0: Форма бизнеса (ИП или ООО) -->
+                <div class="space-y-4">
+                    <label class="block text-sm font-bold text-slate-200 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/40 flex items-center justify-center text-xs">1</span>
+                        Форма вашего бизнеса:
+                    </label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <label class="border border-slate-700 bg-slate-800/50 rounded-2xl p-4 cursor-pointer hover:border-purple-500 transition flex items-center gap-3">
+                            <input type="radio" name="biz-type" value="ip" checked class="accent-purple-500 w-4 h-4" onchange="calculate()">
+                            <span class="font-bold text-white text-base">Индивидуальный предприниматель (ИП)</span>
+                        </label>
+                        <label class="border border-slate-700 bg-slate-800/50 rounded-2xl p-4 cursor-pointer hover:border-purple-500 transition flex items-center gap-3">
+                            <input type="radio" name="biz-type" value="ooo" class="accent-purple-500 w-4 h-4" onchange="calculate()">
+                            <span class="font-bold text-white text-base">Юридическое лицо (ООО)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Блок 1: Масштаб бизнеса (Выручка) -->
+                <div class="space-y-4">
+                    <label class="block text-sm font-bold text-slate-200 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/40 flex items-center justify-center text-xs">2</span>
+                        Ваша годовая выручка (масштаб бизнеса):
+                    </label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <label class="border border-slate-700 bg-slate-800/50 rounded-2xl p-4 cursor-pointer hover:border-purple-500 transition relative flex flex-col justify-between group">
+                            <input type="radio" name="revenue" value="1" checked class="peer sr-only" onchange="calculate()">
+                            <div class="absolute top-4 right-4 w-4 h-4 rounded-full border border-slate-500 peer-checked:border-purple-400 peer-checked:bg-purple-500 flex items-center justify-center">
+                                <div class="w-1.5 h-1.5 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
+                            </div>
+                            <div>
+                                <span class="font-bold block text-white mb-1">До 10 млн ₽</span>
+                                <span class="text-xs text-slate-400">Микробизнес / старт</span>
+                            </div>
+                        </label>
+
+                        <label class="border border-slate-700 bg-slate-800/50 rounded-2xl p-4 cursor-pointer hover:border-purple-500 transition relative flex flex-col justify-between group">
+                            <input type="radio" name="revenue" value="2" class="peer sr-only" onchange="calculate()">
+                            <div class="absolute top-4 right-4 w-4 h-4 rounded-full border border-slate-500 peer-checked:border-purple-400 peer-checked:bg-purple-500 flex items-center justify-center">
+                                <div class="w-1.5 h-1.5 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
+                            </div>
+                            <div>
+                                <span class="font-bold block text-white mb-1">11 – 30 млн ₽</span>
+                                <span class="text-xs text-slate-400">Растущий бизнес</span>
+                            </div>
+                        </label>
+
+                        <label class="border border-slate-700 bg-slate-800/50 rounded-2xl p-4 cursor-pointer hover:border-purple-500 transition relative flex flex-col justify-between group">
+                            <input type="radio" name="revenue" value="3" class="peer sr-only" onchange="calculate()">
+                            <div class="absolute top-4 right-4 w-4 h-4 rounded-full border border-slate-500 peer-checked:border-purple-400 peer-checked:bg-purple-500 flex items-center justify-center">
+                                <div class="w-1.5 h-1.5 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
+                            </div>
+                            <div>
+                                <span class="font-bold block text-white mb-1">Более 30 млн ₽</span>
+                                <span class="text-xs text-slate-400">Крепкая компания</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Блок 2: Системы налогообложения (Множественный выбор с актуальными НДС) -->
+                <div class="space-y-4">
+                    <label class="block text-sm font-bold text-slate-200 flex items-center justify-between">
+                        <span class="flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/40 flex items-center justify-center text-xs">3</span>
+                            Система налогообложения (можно выбрать несколько для совмещения):
+                        </span>
+                        <span class="text-xs text-cyan-400 font-normal">💡 А какая еще система есть? Совмещаем режимы</span>
+                    </label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <label class="border border-slate-700 bg-slate-800/40 rounded-2xl p-3.5 cursor-pointer hover:border-purple-500 transition flex items-center gap-3">
+                            <input type="checkbox" name="tax" value="usn6" checked class="accent-purple-500 w-4 h-4 rounded" onchange="calculate()">
+                            <span class="text-sm font-medium text-slate-200">УСН Доходы (6%)</span>
+                        </label>
+                        <label class="border border-slate-700 bg-slate-800/40 rounded-2xl p-3.5 cursor-pointer hover:border-purple-500 transition flex items-center gap-3">
+                            <input type="checkbox" name="tax" value="usndr" class="accent-purple-500 w-4 h-4 rounded" onchange="calculate()">
+                            <span class="text-sm font-medium text-slate-200">УСН Доходы минус Расходы</span>
+                        </label>
+                        <label class="border border-slate-700 bg-slate-800/40 rounded-2xl p-3.5 cursor-pointer hover:border-purple-500 transition flex items-center gap-3">
+                            <input type="checkbox" name="tax" value="patent" class="accent-purple-500 w-4 h-4 rounded" onchange="calculate()">
+                            <span class="text-sm font-medium text-slate-200">Патент (ПСН) 🎫</span>
+                        </label>
+                        <label class="border border-slate-700 bg-slate-800/40 rounded-2xl p-3.5 cursor-pointer hover:border-purple-500 transition flex items-center gap-3">
+                            <input type="checkbox" name="tax" value="ausn" class="accent-purple-500 w-4 h-4 rounded" onchange="calculate()">
+                            <span class="text-sm font-medium text-slate-200">АУСН (Автоматизированная)</span>
+                        </label>
+                        <label class="border border-slate-700 bg-slate-800/40 rounded-2xl p-3.5 cursor-pointer hover:border-purple-500 transition flex items-center gap-3">
+                            <input type="checkbox" name="tax" value="osno" class="accent-purple-500 w-4 h-4 rounded" onchange="calculate()">
+                            <span class="text-sm font-medium text-slate-200">ОСНО (Общая система)</span>
+                        </label>
+                        <label class="border border-slate-700 bg-slate-800/40 rounded-2xl p-3.5 cursor-pointer hover:border-purple-500 transition flex items-center gap-3">
+                            <input type="checkbox" name="tax" value="nds5" class="accent-purple-500 w-4 h-4 rounded" onchange="calculate()">
+                            <span class="text-sm font-medium text-slate-200">НДС 5% (спецставка)</span>
+                        </label>
+                        <label class="border border-slate-700 bg-slate-800/40 rounded-2xl p-3.5 cursor-pointer hover:border-purple-500 transition flex items-center gap-3">
+                            <input type="checkbox" name="tax" value="nds7" class="accent-purple-500 w-4 h-4 rounded" onchange="calculate()">
+                            <span class="text-sm font-medium text-slate-200">НДС 7% (спецставка)</span>
+                        </label>
+                        <label class="border border-slate-700 bg-slate-800/40 rounded-2xl p-3.5 cursor-pointer hover:border-purple-500 transition flex items-center gap-3">
+                            <input type="checkbox" name="tax" value="nds22" class="accent-purple-500 w-4 h-4 rounded" onchange="calculate()">
+                            <span class="text-sm font-medium text-slate-200">НДС 22% (классика)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Блок 3: Объемы (Банк, Сотрудники, Чеки / Авансовые отчеты) -->
+                <div class="space-y-6 pt-4 border-t border-slate-800">
+                    <label class="block text-sm font-bold text-slate-200 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/40 flex items-center justify-center text-xs">4</span>
+                        Объемы операций, команда и расчеты:
+                    </label>
+
+                    <!-- Банк -->
+                    <div class="space-y-2 bg-slate-800/40 p-4 rounded-2xl border border-slate-700/60">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-300 font-medium">Операции по расчетному счету в месяц:</span>
+                            <span id="bank-val" class="font-bold text-yellow-400">до 30 шт.</span>
+                        </div>
+                        <input type="range" id="bank-ops" min="1" max="4" value="1" oninput="updateRangeText(); calculate()" class="w-full accent-purple-500 cursor-pointer">
+                        <div class="flex justify-between text-xs text-slate-400 font-medium">
+                            <span>1-30</span>
+                            <span>31-60</span>
+                            <span>61-100</span>
+                            <span>100+</span>
+                        </div>
+                    </div>
+
+                    <!-- Сотрудники с точным описанием -->
+                    <div class="bg-slate-800/40 p-4 rounded-2xl border border-slate-700/60 space-y-2">
+                        <label class="block text-xs font-semibold text-slate-300">
+                            👥 Количество сотрудников:
+                            <span class="block font-normal text-slate-400 mt-0.5">Не те, кто реально работает на вас неофициально, а кто у вас устроен (по трудовой книжке или договору).</span>
+                        </label>
+                        <input type="number" id="employees" min="0" value="0" onchange="calculate()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-100 font-medium focus:outline-none focus:border-purple-500">
+                    </div>
+
+                    <!-- Вопрос про чеки (авансовые отчеты) собственнику -->
+                    <div class="bg-slate-800/40 p-4 rounded-2xl border border-slate-700/60 space-y-2">
+                        <label class="block text-xs font-semibold text-slate-300">
+                            🧾 Чеки по бизнес-карте или за наличку (расходы собственника):
+                            <span class="block font-normal text-slate-400 mt-0.5">Сколько у вас в месяц чеков за покупки для бизнеса с личных карт или бизнес-карты? (собираем и проводим авансовые отчеты).</span>
+                        </label>
+                        <select id="receipts" onchange="calculate()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-100 font-medium focus:outline-none focus:border-purple-500">
+                            <option value="0">Вообще нет / всё строго по безналу по счетам</option>
+                            <option value="1">Немного (1–5 чеков в месяц)</option>
+                            <option value="5">Регулярно (до 15 чеков в месяц)</option>
+                            <option value="15">Очень много (постоянные закупки, чеки каждый день)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Блок 4: Формат общения (Мультивыбор) -->
+                <div class="space-y-4 pt-4 border-t border-slate-800">
+                    <label class="block text-sm font-bold text-slate-200 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/40 flex items-center justify-center text-xs">5</span>
+                        Как вы хотите общаться с бухгалтером? (можно выбрать несколько вариантов):
+                    </label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <label class="border border-slate-700 bg-slate-800/40 rounded-2xl p-3.5 cursor-pointer hover:border-purple-500 transition flex items-center gap-3">
+                            <input type="checkbox" name="comm" value="chat" checked class="accent-purple-500 w-4 h-4 rounded" onchange="calculate()">
+                            <span class="text-sm font-medium text-slate-200">💬 Переписка в Telegram / мессенджерах</span>
+                        </label>
+                        <label class="border border-slate-700 bg-slate-800/40 rounded-2xl p-3.5 cursor-pointer hover:border-purple-500 transition flex items-center gap-3">
+                            <input type="checkbox" name="comm" value="call" class="accent-purple-500 w-4 h-4 rounded" onchange="calculate()">
+                            <span class="text-sm font-medium text-slate-200">📞 Плановый созвон раз в месяц (+1 500 ₽)</span>
+                        </label>
+                        <label class="border border-slate-700 bg-slate-800/40 rounded-2xl p-3.5 cursor-pointer hover:border-purple-500 transition flex items-center gap-3">
+                            <input type="checkbox" name="comm" value="urgent" class="accent-purple-500 w-4 h-4 rounded" onchange="calculate()">
+                            <span class="text-sm font-medium text-slate-200">⚡ Оперативные голосовые и звонки (+2 500 ₽)</span>
+                        </label>
+                        <label class="border border-slate-700 bg-slate-800/40 rounded-2xl p-3.5 cursor-pointer hover:border-purple-500 transition flex items-center gap-3">
+                            <input type="checkbox" name="comm" value="auto" class="accent-purple-500 w-4 h-4 rounded" onchange="calculate()">
+                            <span class="text-sm font-medium text-slate-200">🤖 Сервисный режим / минимум контактов</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Блок 5: Уровень вовлеченности -->
+                <div class="space-y-4 pt-4 border-t border-slate-800">
+                    <label class="block text-sm font-bold text-slate-200 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/40 flex items-center justify-center text-xs">6</span>
+                        Степень нашего погружения в ваш бизнес:
+                    </label>
+                    <div class="space-y-3">
+                        <label class="border border-slate-700 bg-slate-800/40 rounded-2xl p-4 cursor-pointer hover:border-purple-500 transition flex items-start gap-3">
+                            <input type="radio" name="involvement" value="base" checked class="accent-purple-500 mt-1" onchange="calculate()">
+                            <div>
+                                <span class="font-bold text-sm block text-white">🎯 Просто сделайте отчеты</span>
+                                <span class="text-xs text-slate-400">Базовая гигиена: налоги посчитаны, штрафов нет.</span>
+                            </div>
+                        </label>
+                        <label class="border border-slate-700 bg-slate-800/40 rounded-2xl p-4 cursor-pointer hover:border-purple-500 transition flex items-start gap-3">
+                            <input type="radio" name="involvement" value="advice" class="accent-purple-500 mt-1" onchange="calculate()">
+                            <div>
+                                <span class="font-bold text-sm block text-white">💡 Нужны советы и подсказки (+1 500 ₽)</span>
+                                <span class="text-xs text-slate-400">Подсказываем, как оптимизировать налоги и сэкономить.</span>
+                            </div>
+                        </label>
+                        <label class="border border-slate-700 bg-slate-800/40 rounded-2xl p-4 cursor-pointer hover:border-purple-500 transition flex items-start gap-3">
+                            <input type="radio" name="involvement" value="partner" class="accent-purple-500 mt-1" onchange="calculate()">
+                            <div>
+                                <span class="font-bold text-sm block text-white">🤝 Финдирекционный партнер (+4 000 ₽)</span>
+                                <span class="text-xs text-slate-400">Максимальная вовлеченность, страховка от кассовых разрывов.</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Блок 6: Управленческая отчетность (Отдельно с пояснением) -->
+                <div class="space-y-4 pt-4 border-t border-slate-800">
+                    <div class="bg-purple-950/40 border border-purple-500/30 p-4 rounded-2xl space-y-1">
+                        <h4 class="text-sm font-bold text-purple-300">📊 Нужна ли вам управленческая отчетность?</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            <strong class="text-white">Важно:</strong> Налоговой управленческая отчетность вообще не нужна — её сдавать не требуют. Она не обязательная для бухгалтерии. Но она <strong class="text-white">критически важна вам самим</strong>, чтобы видеть реальную картину: куда уходят деньги, есть ли чистая прибыль и сколько зарабатывает каждый проект. За это можно не платить, если вам достаточно только налогов, но с ней вы полностью владеете цифрами своего бизнеса!
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                        <label class="border border-slate-700 bg-slate-800/40 rounded-2xl p-3.5 cursor-pointer hover:border-purple-500 transition flex items-center gap-3">
+                            <input type="checkbox" id="opt-dds" value="15000" class="accent-purple-500 w-4 h-4 rounded" onchange="calculate()">
+                            <span class="text-sm font-medium text-slate-200">💰 Отчет ДДС (движение денег) — 15 000 ₽</span>
+                        </label>
+                        <label class="border border-slate-700 bg-slate-800/40 rounded-2xl p-3.5 cursor-pointer hover:border-purple-500 transition flex items-center gap-3">
+                            <input type="checkbox" id="opt-opiu" value="10000" class="accent-purple-500 w-4 h-4 rounded" onchange="calculate()">
+                            <span class="text-sm font-medium text-slate-200">📈 Отчет ОПИУ (прибыли/убытки) — 10 000 ₽</span>
+                        </label>
+                        <label class="border border-slate-700 bg-slate-800/40 rounded-2xl p-3.5 cursor-pointer hover:border-purple-500 transition flex items-center gap-3">
+                            <input type="checkbox" id="opt-mp" value="3000" class="accent-purple-500 w-4 h-4 rounded" onchange="calculate()">
+                            <span class="text-sm font-medium text-slate-200">🛍️ Торгуем на маркетплейсах — 3 000 ₽</span>
+                        </label>
+                        <label class="border border-slate-700 bg-slate-800/40 rounded-2xl p-3.5 cursor-pointer hover:border-purple-500 transition flex items-center gap-3">
+                            <input type="checkbox" id="opt-chestny" value="4000" class="accent-purple-500 w-4 h-4 rounded" onchange="calculate()">
+                            <span class="text-sm font-medium text-slate-200">🏷️ Честный Знак / Маркировка — 4 000 ₽</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Блок 7: Выбор тарифа (Предоплата, Постоплата, Годовой) -->
+                <div class="space-y-4 pt-4 border-t border-slate-800">
+                    <label class="block text-sm font-bold text-slate-200 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/40 flex items-center justify-center text-xs">7</span>
+                        Выберите удобный формат оплаты тарифа:
+                    </label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <label class="border border-slate-700 bg-slate-800/40 rounded-2xl p-4 cursor-pointer hover:border-purple-500 transition flex flex-col justify-between">
+                            <input type="radio" name="tariff-plan" value="prepaid" checked class="accent-purple-500 mb-2" onchange="calculate()">
+                            <div>
+                                <span class="font-bold text-sm block text-white">💳 Предоплата</span>
+                                <span class="text-xs text-slate-400">Стандартная оплата за месяц вперед</span>
+                            </div>
+                        </label>
+                        <label class="border border-slate-700 bg-slate-800/40 rounded-2xl p-4 cursor-pointer hover:border-purple-500 transition flex flex-col justify-between">
+                            <input type="radio" name="tariff-plan" value="postpaid" class="accent-purple-500 mb-2" onchange="calculate()">
+                            <div>
+                                <span class="font-bold text-sm block text-white">📋 Постоплата</span>
+                                <span class="text-xs text-slate-400">Оплата по итогам отчетного периода (+10%)</span>
+                            </div>
+                        </label>
+                        <label class="border border-slate-700 bg-slate-800/40 rounded-2xl p-4 cursor-pointer hover:border-purple-500 transition flex flex-col justify-between">
+                            <input type="radio" name="tariff-plan" value="annual" class="accent-purple-500 mb-2" onchange="calculate()">
+                            <div>
+                                <span class="font-bold text-sm block text-white">🌟 Годовой тариф</span>
+                                <span class="text-xs text-slate-400">Максимальная выгода и скидка (-15%)</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Правая колонка: Итоговый расчет и заявка (4 колонки) -->
+            <div class="lg:col-span-4 bg-slate-950 p-6 sm:p-10 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-slate-800">
+                <div>
+                    <div class="flex items-center justify-between mb-8">
+                        <span class="text-xs font-bold uppercase tracking-wider text-purple-300 bg-purple-950 px-3.5 py-1.5 rounded-full border border-purple-800/60">Твой расчет КП</span>
+                        <span id="tariff-label" class="text-xs text-yellow-400 font-semibold">Предоплата</span>
+                    </div>
+
+                    <div class="space-y-6 mb-8">
+                        <div>
+                            <p class="text-slate-400 text-xs mb-1">Итоговая стоимость обслуживания:</p>
+                            <div class="flex items-baseline gap-2">
+                                <span id="total-price" class="text-4xl font-black text-white tracking-tight">0 ₽</span>
+                                <span id="period-label" class="text-slate-400 text-sm">/ мес</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-900/80 rounded-2xl p-4 border border-slate-800 space-y-3 text-sm">
+                            <p class="font-semibold text-slate-300 text-xs uppercase tracking-wider mb-2">Состав тарифа:</p>
+                            <div class="flex justify-between text-slate-200">
+                                <span id="summary-category">Базовый масштаб</span>
+                                <span id="summary-base-price" class="font-medium">5 000 ₽</span>
+                            </div>
+                            <div id="summary-details" class="text-xs text-slate-400 pt-2 border-t border-slate-800 space-y-1.5">
+                                <!-- Динамический вывод -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <a id="tg-button" href="https://t.me/mivdele" target="_blank" class="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-white font-bold py-4 px-6 rounded-2xl transition shadow-xl shadow-purple-500/25 flex items-center justify-center gap-2 text-base text-center">
+                        Обсудить тариф в Telegram 🚀
+                    </a>
+                    <p class="text-center text-xs text-slate-500">
+                        Ссылка переведет на официальный аккаунт <span class="text-purple-400 font-semibold">@mivdele</span>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Скрипты расчета -->
+    <script>
+        function updateRangeText() {
+            const val = document.getElementById('bank-ops').value;
+            const texts = ["до 30 шт.", "31–60 шт.", "61–100 шт.", "Больше 100 шт."];
+            document.getElementById('bank-val').innerText = texts[val - 1];
+        }
+
+        function calculate() {
+            // Форма бизнеса
+            const bizType = document.querySelector('input[name="biz-type"]:checked').value;
+            
+            // Выручка
+            const revenueCat = document.querySelector('input[name="revenue"]:checked').value;
+            
+            let basePrice = 5000;
+            let scaleName = (bizType === 'ooo' ? "ООО" : "ИП") + " (до 10 млн)";
+            if (revenueCat === '2') {
+                basePrice = 9000;
+                scaleName = (bizType === 'ooo' ? "ООО" : "ИП") + " (11–30 млн)";
+            } else if (revenueCat === '3') {
+                basePrice = 15000;
+                scaleName = (bizType === 'ooo' ? "ООО" : "ИП") + " (более 30 млн)";
+            }
+
+            // Налоги (множественный выбор)
+            const taxCheckboxes = document.querySelectorAll('input[name="tax"]:checked');
+            let taxCost = 0;
+            let taxNames = [];
+            
+            taxCheckboxes.forEach(cb => {
+                if (cb.value === 'usn6') { taxCost += 0; taxNames.push("УСН 6%"); }
+                if (cb.value === 'usndr') { taxCost += 2000; taxNames.push("УСН Д-Р"); }
+                if (cb.value === 'patent') { taxCost += 1000; taxNames.push("Патент"); }
+                if (cb.value === 'ausn') { taxCost += 1000; taxNames.push("АУСН"); }
+                if (cb.value === 'osno') { taxCost += 6000; taxNames.push("ОСНО"); }
+                if (cb.value === 'nds5') { taxCost += 3000; taxNames.push("НДС 5%"); }
+                if (cb.value === 'nds7') { taxCost += 4000; taxNames.push("НДС 7%"); }
+                if (cb.value === 'nds22') { taxCost += 7000; taxNames.push("НДС 22%"); }
+            });
+            if (taxNames.length === 0) taxNames.push("Не выбрано");
+
+            // Банк операции
+            const bankOpsVal = parseInt(document.getElementById('bank-ops').value);
+            let bankCost = (bankOpsVal - 1) * 1500;
+
+            // Сотрудники
+            const employees = parseInt(document.getElementById('employees').value) || 0;
+            let staffCost = employees * 1200;
+
+            // Чеки / авансовые отчеты
+            const receiptsVal = parseInt(document.getElementById('receipts').value) || 0;
+            let receiptCost = receiptsVal * 300;
+
+            // Формат общения (мультивыбор чекбоксов)
+            const commCheckboxes = document.querySelectorAll('input[name="comm"]:checked');
+            let commCost = 0;
+            let commNames = [];
+            commCheckboxes.forEach(cb => {
+                if(cb.value === 'chat') { commNames.push("Мессенджеры"); }
+                if(cb.value === 'call') { commCost += 1500; commNames.push("Созвон раз в месяц"); }
+                if(cb.value === 'urgent') { commCost += 2500; commNames.push("Оперативные звонки"); }
+                if(cb.value === 'auto') { commNames.push("Сервисный режим"); }
+            });
+            if(commNames.length === 0) commNames.push("Стандарт");
+
+            // Вовлеченность
+            const involvement = document.querySelector('input[name="involvement"]:checked').value;
+            let invCost = 0;
+            let invText = "Просто отчеты";
+            if (involvement === 'advice') { invCost = 1500; invText = "Советы и подсказки"; }
+            if (involvement === 'partner') { invCost = 4000; invText = "Финдир. партнер"; }
+
+            // Управленческий учет и специфика (чекбоксы)
+            let extrasCost = 0;
+            let extrasHTML = "";
+
+            if (document.getElementById('opt-dds').checked) { extrasCost += 15000; extrasHTML += `<div>• Отчет ДДС: +15 000 ₽</div>`; }
+            if (document.getElementById('opt-opiu').checked) { extrasCost += 10000; extrasHTML += `<div>• Отчет ОПИУ: +10 000 ₽</div>`; }
+            if (document.getElementById('opt-mp').checked) { extrasCost += 3000; extrasHTML += `<div>• Маркетплейсы: +3 000 ₽</div>`; }
+            if (document.getElementById('opt-chestny').checked) { extrasCost += 4000; extrasHTML += `<div>• Честный Знак: +4 000 ₽</div>`; }
+
+            // Суммарно за месяц
+            let monthlySubtotal = basePrice + taxCost + bankCost + staffCost + receiptCost + commCost + invCost + extrasCost;
+
+            // Выбор тарифа оплаты (предоплата, постоплата, годовой со скидкой)
+            const tariffPlan = document.querySelector('input[name="tariff-plan"]:checked').value;
+            let finalPrice = monthlySubtotal;
+            let tariffLabelText = "Предоплата (за месяц)";
+            let periodText = "/ мес";
+
+            if (tariffPlan === 'postpaid') {
+                finalPrice = Math.round(monthlySubtotal * 1.1);
+                tariffLabelText = "Постоплата (+10%)";
+                periodText = "/ мес";
+            } else if (tariffPlan === 'annual') {
+                finalPrice = Math.round(monthlySubtotal * 12 * 0.85); // скидка 15% за год
+                tariffLabelText = "Годовой тариф (-15%)";
+                periodText = "/ год";
+            }
+
+            // Рендер в UI
+            document.getElementById('top-total').innerText = finalPrice.toLocaleString() + ' ₽ ' + (tariffPlan === 'annual' ? '/ год' : '/ мес');
+            document.getElementById('total-price').innerText = finalPrice.toLocaleString() + ' ₽';
+            document.getElementById('period-label').innerText = periodText;
+            document.getElementById('tariff-label').innerText = tariffLabelText;
+            document.getElementById('summary-category').innerText = scaleName;
+            document.getElementById('summary-base-price').innerText = basePrice.toLocaleString() + ' ₽';
+
+            let detailsHTML = `
+                <div>• Налоги (${taxNames.join(', ')}): +${taxCost} ₽</div>
+                <div>• Банк (${bankOpsVal === 1 ? 'до 30' : bankOpsVal * 30 + ' операц'}): +${bankCost} ₽</div>
+            `;
+            if (employees > 0) detailsHTML += `<div>• Сотрудники (${employees} чел): +${staffCost} ₽</div>`;
+            if (receiptsVal > 0) detailsHTML += `<div>• Чеки/авансовые: +${receiptCost} ₽</div>`;
+            detailsHTML += `<div>• Общение: ${commNames.join(', ')}</div>`;
+            detailsHTML += `<div>• Уровень: ${invText}</div>`;
+            detailsHTML += extrasHTML;
+
+            document.getElementById('summary-details').innerHTML = detailsHTML;
+        }
+
+        // Запуск расчета при загрузке страницы
+        window.onload = calculate;
+    </script>
+</body>
+</html>
